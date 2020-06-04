@@ -25,7 +25,7 @@ DPP_MODULE_REGISTRATION_IMPLEMENT(SkeletonModule_SD, "Skeleton_SD");
 
 SkeletonModule_SD::SkeletonModule_SD() : dpp::chain_module()
 {
-  dump_sd;
+  dump_sd = false;
 }
 
 SkeletonModule_SD::~SkeletonModule_SD()

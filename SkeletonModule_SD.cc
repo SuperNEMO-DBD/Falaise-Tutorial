@@ -1,17 +1,18 @@
-#include <bayeux/dpp/chain_module.h>
+#include <bayeux/dpp/base_module.h>
 #include <bayeux/mctools/simulated_data.h>
 
 ////////////////////////////////////////////////////////////////
 
-class SkeletonModule_SD : public dpp::chain_module
+class SkeletonModule_SD : public dpp::base_module
 {
 public:
   SkeletonModule_SD();
   ~SkeletonModule_SD();
 
   void initialize(const datatools::properties &, datatools::service_manager &, dpp::module_handle_dict_type &);
-  dpp::chain_module::process_status process(datatools::things &);
+  dpp::base_module::process_status process(datatools::things &);
   void finalize();
+  void reset ();
   
 private:
   DPP_MODULE_REGISTRATION_INTERFACE(SkeletonModule_SD);
@@ -23,7 +24,7 @@ DPP_MODULE_REGISTRATION_IMPLEMENT(SkeletonModule_SD, "Skeleton_SD");
 
 ////////////////////////////////////////////////////////////////
 
-SkeletonModule_SD::SkeletonModule_SD() : dpp::chain_module()
+SkeletonModule_SD::SkeletonModule_SD() : dpp::base_module()
 {
   dump_sd = false;
 }
@@ -44,7 +45,7 @@ void SkeletonModule_SD::initialize(const datatools::properties & dt_prop, datato
   this->_set_initialized(true);
 }
 
-dpp::chain_module::process_status SkeletonModule_SD::process (datatools::things &event)
+dpp::base_module::process_status SkeletonModule_SD::process (datatools::things &event)
 {
   std::cout << "+++ SkeletonModule_SD::process()" << std::endl;
 
@@ -61,4 +62,8 @@ void SkeletonModule_SD::finalize()
   std::cout << "+++ SkeletonModule_SD::finalize()" << std::endl;
   
   this->_set_initialized(false);
+}
+
+void SkeletonModule_SD::reset()
+{
 }
